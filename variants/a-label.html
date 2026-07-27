@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en" style="color-scheme: dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Small Parts Studio — Choking Hazard Notice</title>
+    <meta
+      name="description"
+      content="Small Parts Studio: a two-person software studio in Littleton, Colorado, building iOS apps and web software. Contains small parts."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Crect x='5' y='5' width='54' height='54' fill='none' stroke='%23f4c400' stroke-width='6'/%3E%3Ctext x='32' y='45' font-family='Arial, Helvetica, sans-serif' font-weight='900' font-size='40' fill='%23f4c400' text-anchor='middle'%3E!%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --yellow: #f4c400;
+        --black: #0a0a0a;
+        --off-white: #f5f2e8;
+        --muted-on-black: #c9c6ba;
+        --muted-on-yellow: #4a3f0a;
+        --rule: 6px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--black);
+        color: var(--off-white);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .stripes {
+        height: clamp(14px, 3vw, 26px);
+        width: 100%;
+        background-image: repeating-linear-gradient(
+          45deg,
+          var(--black) 0,
+          var(--black) 22px,
+          var(--yellow) 22px,
+          var(--yellow) 44px
+        );
+      }
+
+      .band {
+        width: 100%;
+        padding: clamp(28px, 6vw, 64px) clamp(20px, 6vw, 72px);
+        border-bottom: var(--rule) solid var(--black);
+      }
+
+      .band--black {
+        background: var(--black);
+        color: var(--yellow);
+      }
+
+      .band--yellow {
+        background: var(--yellow);
+        color: var(--black);
+        border-bottom-color: var(--yellow);
+      }
+
+      .band--yellow + .stripes {
+        border-top: none;
+      }
+
+      .eyebrow {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: clamp(0.7rem, 1.6vw, 0.95rem);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        margin: 0 0 clamp(12px, 3vw, 24px);
+      }
+
+      .giant {
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 0.86;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+
+      .giant--hero {
+        font-size: clamp(3.5rem, 15vw, 13rem);
+      }
+
+      .giant--statement {
+        font-size: clamp(2.4rem, 11vw, 8rem);
+      }
+
+      .subhead {
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
+        font-size: clamp(1.15rem, 3.2vw, 2.1rem);
+        max-width: 22ch;
+        margin: clamp(16px, 4vw, 32px) 0 0;
+      }
+
+      .hero-frame {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: clamp(16px, 4vw, 32px);
+      }
+
+      .hero-frame .hazard-icon {
+        flex: 0 0 auto;
+        width: clamp(48px, 8vw, 84px);
+        height: auto;
+      }
+
+      .contents-band {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: clamp(24px, 6vw, 56px);
+        align-items: center;
+      }
+
+      .gauge-icon {
+        width: clamp(90px, 18vw, 180px);
+        height: auto;
+        flex: 0 0 auto;
+      }
+
+      .contents-list {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: clamp(0.85rem, 2vw, 1.05rem);
+        line-height: 1.9;
+        letter-spacing: 0.01em;
+        color: var(--muted-on-black);
+        margin: 0;
+      }
+
+      .contents-list dt {
+        color: var(--yellow);
+        display: inline;
+      }
+
+      .contents-list dd {
+        display: inline;
+        margin: 0 0 0 0.5em;
+      }
+
+      .contents-list .row {
+        display: block;
+        margin: 0 0 4px;
+      }
+
+      .contact-band {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(10px, 2.4vw, 18px);
+      }
+
+      .contact-email {
+        font-weight: 900;
+        text-transform: none;
+        letter-spacing: -0.01em;
+        font-size: clamp(1.4rem, 5vw, 3rem);
+        word-break: break-word;
+        color: var(--black);
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+        text-underline-offset: 6px;
+        text-decoration-color: var(--black);
+      }
+
+      .contact-email:hover,
+      .contact-email:focus-visible {
+        color: var(--off-white);
+        background: var(--black);
+        text-decoration-color: var(--off-white);
+      }
+
+      .contact-email:focus-visible {
+        outline: 3px solid var(--black);
+        outline-offset: 4px;
+      }
+
+      .apps-status {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: clamp(0.85rem, 2vw, 1.05rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted-on-yellow);
+        margin: 0;
+      }
+
+      .placard-code {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: clamp(0.68rem, 1.4vw, 0.82rem);
+        letter-spacing: 0.08em;
+        color: var(--muted-on-black);
+        margin: clamp(20px, 5vw, 40px) 0 0;
+      }
+
+      footer.band {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: baseline;
+        border-bottom: none;
+      }
+
+      footer .footer-copy,
+      footer .footer-status {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+        letter-spacing: 0.04em;
+        color: var(--muted-on-black);
+        margin: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stripes" role="presentation"></div>
+
+    <header class="band band--black">
+      <div class="hero-frame">
+        <div>
+          <p class="eyebrow">
+            Product Safety Notice &middot; Form SPS&#8209;01
+          </p>
+          <h1 class="giant giant--hero">Warning</h1>
+        </div>
+        <svg
+          class="hazard-icon"
+          viewBox="0 0 100 100"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <polygon
+            points="50,6 96,90 4,90"
+            fill="none"
+            stroke="#f4c400"
+            stroke-width="7"
+            stroke-linejoin="miter"
+          />
+          <rect x="46" y="34" width="8" height="30" fill="#f4c400" />
+          <rect x="46" y="70" width="8" height="8" fill="#f4c400" />
+        </svg>
+      </div>
+    </header>
+
+    <main>
+      <section class="band band--yellow" aria-labelledby="statement-heading">
+        <h2 class="giant giant--statement" id="statement-heading">
+          Choking<br />Hazard
+        </h2>
+        <p class="subhead">This studio contains small parts.</p>
+      </section>
+
+      <div class="stripes" role="presentation"></div>
+
+      <section class="band band--black contents-band" aria-label="Contents">
+        <svg
+          class="gauge-icon"
+          viewBox="0 0 200 260"
+          role="img"
+          aria-label="Small parts test gauge pictogram: a ball above a cylinder tube, illustrating the choking hazard test"
+        >
+          <circle
+            cx="100"
+            cy="26"
+            r="24"
+            fill="none"
+            stroke="#f4c400"
+            stroke-width="6"
+          />
+          <line
+            x1="100"
+            y1="50"
+            x2="100"
+            y2="96"
+            stroke="#f4c400"
+            stroke-width="4"
+            stroke-dasharray="8 8"
+          />
+          <ellipse
+            cx="100"
+            cy="100"
+            rx="72"
+            ry="20"
+            fill="none"
+            stroke="#f4c400"
+            stroke-width="6"
+          />
+          <line
+            x1="28"
+            y1="100"
+            x2="28"
+            y2="222"
+            stroke="#f4c400"
+            stroke-width="6"
+          />
+          <line
+            x1="172"
+            y1="100"
+            x2="172"
+            y2="222"
+            stroke="#f4c400"
+            stroke-width="6"
+          />
+          <path
+            d="M28 222 Q100 252 172 222"
+            fill="none"
+            stroke="#f4c400"
+            stroke-width="6"
+          />
+        </svg>
+        <dl class="contents-list">
+          <div class="row">
+            <dt>Contents:</dt>
+            <dd>iOS and web software.</dd>
+          </div>
+          <div class="row">
+            <dt>Team:</dt>
+            <dd>Two people.</dd>
+          </div>
+          <div class="row">
+            <dt>Location:</dt>
+            <dd>Littleton, Colorado.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section
+        class="band band--yellow contact-band"
+        aria-labelledby="contact-heading"
+      >
+        <p class="eyebrow" id="contact-heading">Contact</p>
+        <a class="contact-email" href="mailto:hello@smallpartsstudio.com"
+          >hello@smallpartsstudio.com</a
+        >
+        <p class="apps-status">Apps: coming soon</p>
+        <p class="placard-code" style="color: var(--muted-on-yellow)">
+          Not for children under 3 yrs. Keep this notice.
+        </p>
+      </section>
+    </main>
+
+    <div class="stripes" role="presentation"></div>
+
+    <footer class="band band--black">
+      <p class="footer-copy">
+        &copy; 2026 Small Parts Studio LLC &middot; Littleton, CO
+      </p>
+      <p class="footer-status">Rev. 2026&#8209;07 &middot; SPS&#8209;01</p>
+    </footer>
+  </body>
+</html>

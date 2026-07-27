@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" style="color-scheme: dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Small Parts Studio — Littleton, CO</title>
+    <meta
+      name="description"
+      content="Small Parts Studio is a two-person software studio in Littleton, Colorado, building iOS apps and web software."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Crect x='4' y='4' width='56' height='56' fill='none' stroke='%23f4c400' stroke-width='4'/%3E%3Ctext x='32' y='42' font-family='Arial, Helvetica, sans-serif' font-weight='700' font-size='26' fill='%23f4c400' text-anchor='middle'%3ESP%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --ink: #e8e6e1;
+        --bg: #0a0a0a;
+        --bg-raised: #121210;
+        --muted: #86837a;
+        --accent: #f4c400;
+        --rule: #38362f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: clamp(28px, 6vw, 72px) clamp(20px, 5vw, 32px);
+      }
+
+      .page {
+        width: 100%;
+        max-width: 640px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .site-header {
+        margin-bottom: clamp(40px, 8vw, 64px);
+      }
+
+      .eyebrow {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin: 0 0 18px;
+      }
+
+      .studio-name {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(2.1rem, 7vw, 3.4rem);
+        line-height: 1.05;
+        margin: 0 0 20px;
+        color: var(--ink);
+      }
+
+      .descriptor {
+        font-size: clamp(1rem, 2.4vw, 1.15rem);
+        color: var(--muted);
+        max-width: 34ch;
+        margin: 0;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(28px, 6vw, 40px);
+      }
+
+      .label-block {
+        border: 2px solid var(--ink);
+        background: var(--bg-raised);
+        padding: clamp(20px, 4vw, 30px);
+      }
+
+      .label-block__head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .hazard-icon {
+        flex: 0 0 auto;
+        width: 30px;
+        height: 30px;
+        display: block;
+      }
+
+      .label-block__title {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 1.15rem;
+        margin: 0;
+        color: var(--ink);
+      }
+
+      .label-block hr {
+        border: none;
+        border-top: 1px solid var(--rule);
+        margin: 0 0 16px;
+      }
+
+      .label-block__body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(1rem, 2.6vw, 1.2rem);
+        line-height: 1.4;
+        margin: 0 0 18px;
+        color: var(--ink);
+      }
+
+      .label-block__fine-print {
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.02em;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .contact-row {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: 0.95rem;
+      }
+
+      .contact-row a {
+        color: var(--ink);
+        text-decoration: underline;
+        text-decoration-color: var(--rule);
+        text-underline-offset: 4px;
+      }
+
+      .contact-row a:hover,
+      .contact-row a:focus-visible {
+        color: var(--accent);
+        text-decoration-color: var(--accent);
+      }
+
+      .contact-row a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .apps-status {
+        color: var(--muted);
+      }
+
+      .site-footer {
+        margin-top: clamp(48px, 10vw, 88px);
+        padding-top: 24px;
+        border-top: 1px solid var(--rule);
+        font-family:
+          ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.02em;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <p class="eyebrow">Product Notice</p>
+        <h1 class="studio-name">Small Parts Studio</h1>
+        <p class="descriptor">A small software studio. Littleton, Colorado.</p>
+      </header>
+
+      <main>
+        <section class="label-block" aria-labelledby="warning-heading">
+          <div class="label-block__head">
+            <svg class="hazard-icon" viewBox="0 0 100 100" aria-hidden="true">
+              <polygon
+                points="50,8 95,88 5,88"
+                fill="none"
+                stroke="#f4c400"
+                stroke-width="7"
+                stroke-linejoin="miter"
+              />
+              <rect x="46" y="34" width="8" height="30" fill="#f4c400" />
+              <rect x="46" y="70" width="8" height="8" fill="#f4c400" />
+            </svg>
+            <h2 class="label-block__title" id="warning-heading">Warning</h2>
+          </div>
+          <hr />
+          <p class="label-block__body">
+            Choking hazard &mdash; this studio contains small parts.
+          </p>
+          <p class="label-block__fine-print">
+            Contents: iOS and web software. Team of two. Not a toy.
+          </p>
+        </section>
+
+        <div class="contact-row">
+          <a href="mailto:hello@smallpartsstudio.com"
+            >hello@smallpartsstudio.com</a
+          >
+          <p class="apps-status">Apps: coming soon</p>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Small Parts Studio LLC &middot; Littleton, CO</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+@font-face {
+  font-family: "Small Parts Body";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/barlow-regular-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Small Parts Body";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/barlow-bold-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Small Parts Display";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../assets/fonts/barlow-condensed-black-latin.woff2")
+    format("woff2");
+}

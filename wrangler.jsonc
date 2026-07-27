@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "small-parts-studio",
+  "compatibility_date": "2026-07-25",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "smallpartsstudio.com",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "www.smallpartsstudio.com",
+      "custom_domain": true,
+    },
+  ],
+  "assets": {
+    "directory": "./dist",
+  },
+}

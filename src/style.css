@@ -1,0 +1,80 @@
+@import "./styles/fonts.css";
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f9ece3;
+  --color-ink: #121210;
+  --color-accent: #f2d894;
+  --color-focus: #ffd1d8;
+  --color-contact: #121210;
+  --color-footer: #605b61;
+  --color-space: #121210;
+
+  --font-display: "Small Parts Display", "Arial Narrow", sans-serif;
+  --font-body: "Small Parts Body", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Small Parts Body", "Helvetica Neue", Arial, sans-serif;
+
+  --spacing-gutter: clamp(1.25rem, 3.1vw, 3.75rem);
+  --text-micro: clamp(0.72rem, 0.65rem + 0.18vw, 0.88rem);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 20rem;
+    background: var(--color-paper);
+  }
+
+  body {
+    min-width: 20rem;
+    margin: 0;
+    color: var(--color-ink);
+    background: var(--color-paper);
+    font-family: var(--font-body);
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  a:focus-visible {
+    color: var(--color-ink);
+    background: var(--color-focus);
+    outline: 3px solid var(--color-ink);
+    outline-offset: 4px;
+  }
+}
+
+@layer components {
+  .precision-frame {
+    position: relative;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--frame-radius, 1.5rem);
+  }
+
+  .precision-frame::after {
+    position: absolute;
+    z-index: 20;
+    inset: var(--frame-inset, 0.5rem);
+    border: 1px solid var(--color-ink);
+    border-radius: calc(
+      var(--frame-radius, 1.5rem) - var(--frame-inset, 0.5rem)
+    );
+    content: "";
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Small Parts Studio — Littleton, CO</title>
+    <meta
+      name="description"
+      content="Small Parts Studio is a two-person software studio in Littleton, Colorado, building iOS apps and web software."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a0a'/%3E%3Ctext x='32' y='24' font-family='Arial Narrow, Arial, sans-serif' font-weight='800' font-size='16' fill='%23ece8df' text-anchor='middle' letter-spacing='1'%3ESMALL%3C/text%3E%3Ctext x='32' y='42' font-family='Arial Narrow, Arial, sans-serif' font-weight='800' font-size='16' fill='%23ece8df' text-anchor='middle' letter-spacing='1'%3EPARTS%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --paper: #ece8df;
+        --paper-2: #e1dccf;
+        --ink: #111110;
+        --rule: #3a3a38;
+        --gray: #6b6a63;
+        --red: #d4291a;
+        --display:
+          "Arial Narrow", "Helvetica Neue Condensed", "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+        --mono:
+          ui-monospace, "SF Mono", "Cascadia Mono", "Courier New", Courier,
+          monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      body {
+        background-color: var(--paper);
+        background-image:
+          repeating-linear-gradient(
+            0deg,
+            rgba(90, 115, 150, 0.09) 0,
+            rgba(90, 115, 150, 0.09) 1px,
+            transparent 1px,
+            transparent 40px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(90, 115, 150, 0.09) 0,
+            rgba(90, 115, 150, 0.09) 1px,
+            transparent 1px,
+            transparent 40px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(90, 115, 150, 0.06) 0,
+            rgba(90, 115, 150, 0.06) 1px,
+            transparent 1px,
+            transparent 8px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(90, 115, 150, 0.06) 0,
+            rgba(90, 115, 150, 0.06) 1px,
+            transparent 1px,
+            transparent 8px
+          );
+        color: var(--ink);
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* subtle photocopy grain — one texture technique, kept quiet */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0.07;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--ink);
+        outline-offset: 3px;
+      }
+
+      .flyer {
+        position: relative;
+        max-width: 780px;
+        margin: 0 auto;
+        padding: clamp(36px, 7vw, 64px) clamp(24px, 6vw, 48px)
+          clamp(48px, 8vw, 72px);
+      }
+
+      /* ---------- masthead: dense zone ---------- */
+
+      .masthead {
+        display: grid;
+        grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+        column-gap: clamp(20px, 5vw, 48px);
+        align-items: start;
+        margin-bottom: clamp(28px, 5vw, 40px);
+      }
+
+      .name-block {
+        position: relative;
+        background: var(--paper-2);
+        border: 1px solid var(--rule);
+        padding: clamp(10px, 2.4vw, 22px) clamp(14px, 3vw, 28px);
+        transform: rotate(-2deg);
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.16);
+        width: fit-content;
+        max-width: 100%;
+      }
+
+      .tape {
+        position: absolute;
+        width: 58px;
+        height: 22px;
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+        pointer-events: none;
+      }
+
+      .tape--a {
+        top: -12px;
+        left: 12px;
+        transform: rotate(-7deg);
+      }
+
+      .tape--b {
+        bottom: -12px;
+        right: 18px;
+        transform: rotate(5deg);
+      }
+
+      .name-stack {
+        position: relative;
+      }
+
+      .name-ghost,
+      .name-main {
+        margin: 0;
+        font-family: var(--display);
+        font-stretch: condensed;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: clamp(2.8rem, 14vw, 6.4rem);
+        line-height: 0.86;
+        letter-spacing: -0.01em;
+      }
+
+      .name-ghost {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        color: var(--red);
+        transform: translate(3px, 2px);
+        mix-blend-mode: multiply;
+        user-select: none;
+      }
+
+      .name-main {
+        position: relative;
+        z-index: 1;
+        color: var(--ink);
+      }
+
+      .colophon {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink);
+        line-height: 2.1;
+        padding-top: clamp(6px, 1.5vw, 14px);
+        white-space: nowrap;
+      }
+
+      .colophon p {
+        margin: 0;
+      }
+
+      /* ---------- descriptor ---------- */
+
+      .descriptor {
+        font-family: var(--mono);
+        font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+        line-height: 1.6;
+        max-width: 30ch;
+        margin: 0 0 clamp(48px, 10vw, 88px);
+      }
+
+      /* ---------- empty zone ---------- */
+
+      .void {
+        height: clamp(56px, 16vw, 140px);
+      }
+
+      /* ---------- hazard sticker ---------- */
+
+      .hazard-sticker {
+        position: relative;
+        background: var(--paper);
+        border: 3px solid var(--ink);
+        padding: 16px 20px;
+        max-width: 44ch;
+        transform: rotate(1.4deg);
+        box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.14);
+        margin: 0 0 clamp(40px, 8vw, 72px);
+      }
+
+      .hazard-sticker::before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: -7px;
+        width: 12px;
+        height: 12px;
+        background: var(--red);
+      }
+
+      .hazard-sticker p {
+        margin: 0;
+        font-family: var(--display);
+        font-stretch: condensed;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(0.98rem, 2.6vw, 1.2rem);
+        line-height: 1.32;
+      }
+
+      /* ---------- stamp ---------- */
+
+      .stamp-row {
+        margin: 0 0 clamp(56px, 10vw, 96px);
+      }
+
+      .stamp {
+        display: inline-block;
+        border: 4px double var(--ink);
+        padding: 10px 22px;
+        transform: rotate(-1.1deg);
+      }
+
+      .stamp p {
+        margin: 0;
+        font-family: var(--display);
+        font-stretch: condensed;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        line-height: 1.15;
+      }
+
+      /* ---------- contact ---------- */
+
+      .contact {
+        font-family: var(--mono);
+        font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+        margin: 0 0 clamp(40px, 8vw, 64px);
+      }
+
+      .contact a {
+        text-decoration: underline;
+        text-decoration-color: var(--gray);
+        text-underline-offset: 4px;
+      }
+
+      .contact a:hover {
+        text-decoration-color: var(--ink);
+      }
+
+      /* ---------- footer ---------- */
+
+      .site-footer {
+        border-top: 1px solid var(--rule);
+        padding-top: 18px;
+      }
+
+      .site-footer p {
+        margin: 0;
+        font-family: var(--mono);
+        font-size: 0.74rem;
+        letter-spacing: 0.03em;
+        color: var(--gray);
+      }
+
+      /* ---------- narrow viewports ---------- */
+
+      @media (max-width: 560px) {
+        .masthead {
+          grid-template-columns: 1fr;
+          row-gap: 22px;
+        }
+
+        .colophon {
+          white-space: normal;
+          padding-top: 0;
+        }
+
+        .name-block {
+          transform: rotate(-1.6deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flyer">
+      <header class="masthead">
+        <div class="name-block">
+          <div class="tape tape--a" aria-hidden="true"></div>
+          <div class="tape tape--b" aria-hidden="true"></div>
+          <div class="name-stack">
+            <p class="name-ghost" aria-hidden="true">
+              SMALL<br />PARTS<br />STUDIO
+            </p>
+            <h1 class="name-main">SMALL<br />PARTS<br />STUDIO</h1>
+          </div>
+        </div>
+        <div class="colophon">
+          <p>Littleton, CO</p>
+          <p>Team of two</p>
+          <p>iOS + web</p>
+          <p>Est. 2026</p>
+        </div>
+      </header>
+
+      <p class="descriptor">A small software studio. Littleton, Colorado.</p>
+
+      <div class="void" aria-hidden="true"></div>
+
+      <main>
+        <aside class="hazard-sticker" aria-label="Product warning label">
+          <p>
+            Warning: choking hazard &mdash; this studio contains small parts.
+          </p>
+        </aside>
+
+        <div class="stamp-row">
+          <div class="stamp">
+            <p>Apps:<br />coming soon</p>
+          </div>
+        </div>
+
+        <p class="contact">
+          <a href="mailto:hello@smallpartsstudio.com"
+            >hello@smallpartsstudio.com</a
+          >
+        </p>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Small Parts Studio LLC &middot; Littleton, CO</p>
+      </footer>
+    </div>
+  </body>
+</html>

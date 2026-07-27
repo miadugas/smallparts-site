@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en" style="color-scheme: dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Small Parts Studio — DWG NO. SPS-001</title>
+    <meta
+      name="description"
+      content="Small Parts Studio is a two-person software studio in Littleton, Colorado, building iOS apps and web software. Presented as an engineering parts specification."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230d2b4e'/%3E%3Cpath d='M8 20V8h12M56 20V8H44M8 44v12h12M56 44v12H44' fill='none' stroke='%23eef3f8' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ff5a3c'/%3E%3C/svg%3E"
+    />
+    <style>
+      :root {
+        --blue-deep: #0d2b4e;
+        --blue-panel: #123a63;
+        --line: #eef3f8;
+        --line-dim: #8fb3d6;
+        --rule: rgba(238, 243, 248, 0.28);
+        --rule-strong: rgba(238, 243, 248, 0.5);
+        --accent: #ff5a3c;
+        --font-mono:
+          ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo,
+          Consolas, monospace;
+        --font-grotesk: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        border-radius: 0 !important;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--blue-deep);
+        background-image:
+          repeating-linear-gradient(
+            to right,
+            rgba(238, 243, 248, 0.05) 0,
+            rgba(238, 243, 248, 0.05) 1px,
+            transparent 1px,
+            transparent 24px
+          ),
+          repeating-linear-gradient(
+            to bottom,
+            rgba(238, 243, 248, 0.05) 0,
+            rgba(238, 243, 248, 0.05) 1px,
+            transparent 1px,
+            transparent 24px
+          );
+        color: var(--line);
+        font-family: var(--font-mono);
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: clamp(20px, 4vw, 48px) clamp(14px, 4vw, 24px);
+      }
+
+      .sheet {
+        width: 100%;
+        max-width: 760px;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      a {
+        color: var(--line);
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      /* ---------- title block ---------- */
+
+      .titleblock {
+        border: 1px solid var(--rule-strong);
+        background: var(--blue-panel);
+        padding: clamp(20px, 4vw, 30px);
+        margin-bottom: clamp(28px, 5vw, 40px);
+      }
+
+      .eyebrow {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--line-dim);
+        margin: 0 0 14px;
+      }
+
+      .studio-name {
+        font-family: var(--font-grotesk);
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        font-size: clamp(1.9rem, 6.4vw, 3rem);
+        line-height: 1.05;
+        margin: 0 0 20px;
+        color: var(--line);
+      }
+
+      .tb-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        margin: 0;
+        border-top: 1px solid var(--rule);
+        padding-top: 16px;
+      }
+
+      .tb-cell {
+        flex: 1 1 110px;
+        padding: 0 16px 8px 0;
+        border-left: 1px solid var(--rule);
+        padding-left: 16px;
+      }
+
+      .tb-cell:first-child {
+        border-left: none;
+        padding-left: 0;
+      }
+
+      .tb-cell dt {
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--line-dim);
+        margin: 0 0 4px;
+      }
+
+      .tb-cell dd {
+        font-size: 0.92rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        margin: 0;
+        color: var(--line);
+      }
+
+      .tb-cell .stamp {
+        display: inline-block;
+        background: var(--accent);
+        color: var(--blue-deep);
+        padding: 2px 9px;
+        font-weight: 700;
+      }
+
+      /* ---------- section labels ---------- */
+
+      .section-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--line-dim);
+        font-weight: 400;
+        margin: 0 0 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(28px, 5vw, 40px);
+      }
+
+      /* ---------- diagram ---------- */
+
+      .diagram-frame {
+        border: 1px solid var(--rule);
+        padding: clamp(14px, 3vw, 24px) clamp(14px, 3vw, 24px) 10px;
+      }
+
+      .diagram svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .part-outline {
+        fill: none;
+        stroke: var(--line);
+        stroke-width: 1.5;
+      }
+
+      .control-dot {
+        fill: var(--line);
+        stroke: none;
+      }
+
+      .leader {
+        fill: none;
+        stroke: var(--line-dim);
+        stroke-width: 1;
+        stroke-dasharray: 3 3;
+      }
+
+      .callout circle {
+        fill: var(--accent);
+      }
+
+      .callout text {
+        fill: var(--blue-deep);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
+        text-anchor: middle;
+        dominant-baseline: central;
+      }
+
+      .scale-note {
+        margin: 6px 0 0;
+        text-align: right;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--line-dim);
+      }
+
+      /* ---------- parts table ---------- */
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+      }
+
+      caption {
+        text-align: left;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--rule);
+        padding: 10px 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      thead th {
+        font-size: 0.66rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--line-dim);
+        font-weight: 400;
+        background: var(--blue-panel);
+      }
+
+      tbody td {
+        color: var(--line);
+      }
+
+      td.col-item,
+      th.col-item {
+        width: 8%;
+        white-space: nowrap;
+      }
+
+      td.col-part,
+      th.col-part {
+        width: 16%;
+        white-space: nowrap;
+      }
+
+      td.col-qty,
+      th.col-qty {
+        width: 20%;
+      }
+
+      tbody a {
+        text-decoration: underline;
+        text-decoration-color: var(--rule-strong);
+        text-underline-offset: 3px;
+      }
+
+      tbody a:hover {
+        color: var(--accent);
+        text-decoration-color: var(--accent);
+      }
+
+      /* ---------- notes ---------- */
+
+      .notes-list {
+        margin: 0;
+        padding-left: 1.4em;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 0.82rem;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        color: var(--line);
+      }
+
+      .notes-list li {
+        padding-left: 4px;
+      }
+
+      .notes-list li::marker {
+        color: var(--line-dim);
+        font-size: 0.8em;
+      }
+
+      .notes-list .flag {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      /* ---------- footer ---------- */
+
+      .site-footer {
+        margin-top: clamp(32px, 6vw, 48px);
+        padding-top: 16px;
+        border-top: 1px solid var(--rule);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.72rem;
+        letter-spacing: 0.03em;
+        color: var(--line-dim);
+      }
+
+      .site-footer p {
+        margin: 0;
+      }
+
+      /* ---------- responsive table degrade ---------- */
+
+      @media (max-width: 560px) {
+        .tb-cell {
+          flex: 1 1 45%;
+          border-left: none;
+          padding-left: 0;
+        }
+
+        table,
+        thead,
+        tbody,
+        tr {
+          display: block;
+        }
+
+        thead {
+          position: absolute;
+          left: -9999px;
+        }
+
+        tbody tr {
+          border: 1px solid var(--rule);
+          margin-bottom: 10px;
+        }
+
+        tbody tr:last-child {
+          margin-bottom: 0;
+        }
+
+        td {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+          border: none;
+          border-bottom: 1px solid var(--rule);
+          width: auto !important;
+          word-break: break-word;
+          overflow-wrap: anywhere;
+        }
+
+        td:last-child {
+          border-bottom: none;
+        }
+
+        td::before {
+          content: attr(data-label);
+          font-size: 0.62rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: var(--line-dim);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sheet">
+      <header class="titleblock">
+        <p class="eyebrow">Technical Data Sheet — Not For Production</p>
+        <h1 class="studio-name">Small Parts Studio</h1>
+        <dl class="tb-grid">
+          <div class="tb-cell">
+            <dt>Dwg No.</dt>
+            <dd>SPS-001</dd>
+          </div>
+          <div class="tb-cell">
+            <dt>Rev</dt>
+            <dd><span class="stamp">A</span></dd>
+          </div>
+          <div class="tb-cell">
+            <dt>Scale</dt>
+            <dd>Small</dd>
+          </div>
+          <div class="tb-cell">
+            <dt>Sheet</dt>
+            <dd>1 of 1</dd>
+          </div>
+          <div class="tb-cell">
+            <dt>Location</dt>
+            <dd>Littleton, CO</dd>
+          </div>
+        </dl>
+      </header>
+
+      <main>
+        <section aria-labelledby="diagram-heading">
+          <h2 id="diagram-heading" class="section-label">
+            Assembly — Exploded View
+          </h2>
+          <div class="diagram-frame">
+            <p class="sr-only">
+              Exploded diagram of three components: a handheld device shape
+              keyed to callout 1, a browser window shape keyed to callout 2, and
+              two overlapping circles keyed to callout 3. Each callout
+              corresponds to a row in the parts list below.
+            </p>
+            <div class="diagram">
+              <svg
+                viewBox="0 0 640 190"
+                role="img"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <!-- item 1: device -->
+                <rect
+                  class="part-outline"
+                  x="70"
+                  y="52"
+                  width="60"
+                  height="108"
+                />
+                <circle class="control-dot" cx="100" cy="146" r="3" />
+                <path class="leader" d="M130 55 L152 24" />
+                <g class="callout">
+                  <circle cx="160" cy="20" r="10" />
+                  <text x="160" y="21">1</text>
+                </g>
+
+                <!-- item 2: browser window -->
+                <rect
+                  class="part-outline"
+                  x="248"
+                  y="66"
+                  width="150"
+                  height="94"
+                />
+                <line class="part-outline" x1="248" y1="86" x2="398" y2="86" />
+                <circle class="control-dot" cx="260" cy="76" r="2" />
+                <circle class="control-dot" cx="270" cy="76" r="2" />
+                <circle class="control-dot" cx="280" cy="76" r="2" />
+                <path class="leader" d="M398 68 L418 24" />
+                <g class="callout">
+                  <circle cx="426" cy="20" r="10" />
+                  <text x="426" y="21">2</text>
+                </g>
+
+                <!-- item 3: team of two -->
+                <circle class="part-outline" cx="498" cy="128" r="34" />
+                <circle class="part-outline" cx="540" cy="128" r="34" />
+                <path class="leader" d="M528 96 L558 24" />
+                <g class="callout">
+                  <circle cx="566" cy="20" r="10" />
+                  <text x="566" y="21">3</text>
+                </g>
+              </svg>
+            </div>
+            <p class="scale-note">Not to scale.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="parts-heading">
+          <h2 id="parts-heading" class="section-label">Parts List</h2>
+          <table>
+            <caption class="sr-only">
+              Parts list for Small Parts Studio
+            </caption>
+            <thead>
+              <tr>
+                <th class="col-item" scope="col">Item</th>
+                <th class="col-part" scope="col">Part No.</th>
+                <th scope="col">Description</th>
+                <th class="col-qty" scope="col">Qty</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-item" data-label="Item">1</td>
+                <td class="col-part" data-label="Part No.">001</td>
+                <td data-label="Description">iOS Applications</td>
+                <td class="col-qty" data-label="Qty">Various</td>
+              </tr>
+              <tr>
+                <td class="col-item" data-label="Item">2</td>
+                <td class="col-part" data-label="Part No.">002</td>
+                <td data-label="Description">Web Software</td>
+                <td class="col-qty" data-label="Qty">1 (ongoing)</td>
+              </tr>
+              <tr>
+                <td class="col-item" data-label="Item">3</td>
+                <td class="col-part" data-label="Part No.">003</td>
+                <td data-label="Description">Studio Team</td>
+                <td class="col-qty" data-label="Qty">2</td>
+              </tr>
+              <tr>
+                <td class="col-item" data-label="Item">4</td>
+                <td class="col-part" data-label="Part No.">004</td>
+                <td data-label="Description">
+                  Contact Interface —
+                  <a href="mailto:hello@smallpartsstudio.com"
+                    >hello@smallpartsstudio.com</a
+                  >
+                </td>
+                <td class="col-qty" data-label="Qty">1</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="notes-heading">
+          <h2 id="notes-heading" class="section-label">Notes</h2>
+          <ol class="notes-list">
+            <li>Unless otherwise specified, dimensions are approximate.</li>
+            <li>
+              <span class="flag">Warning</span> — choking hazard. This studio
+              contains small parts. Keep away from children under 3.
+            </li>
+            <li>
+              Item 001 and item 002 are sold separately. Apps coming soon.
+            </li>
+            <li>Not to scale.</li>
+          </ol>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Small Parts Studio LLC · Littleton, CO</p>
+        <p>SPS-001 / A</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -36,10 +36,6 @@ import HardwareTrail from "./HardwareTrail.vue";
           hello@smallpartsstudio.com
         </a>
       </address>
-      <p class="precision-frame status m-0" aria-label="First releases soon">
-        <span>First releases</span>
-        <strong>Soon</strong>
-      </p>
     </div>
   </section>
 </template>
@@ -104,44 +100,13 @@ import HardwareTrail from "./HardwareTrail.vue";
   text-decoration-color: #ffadad;
   text-decoration-thickness: 0.12em;
   text-underline-offset: 0.18em;
+  display: inline-block;
+  padding-block: 0.8rem;
+  margin-block: -0.8rem;
 }
 
 .contact a:hover {
   color: var(--color-ink);
-}
-
-.status {
-  --frame-inset: 0.3rem;
-  --frame-radius: 0.8rem;
-
-  display: inline-grid;
-  width: max-content;
-  gap: 0.1rem;
-  margin-top: 0.3rem;
-  padding: 0.65rem 0.8rem 0.6rem;
-  color: var(--color-ink);
-  background: #ffd6a5;
-  box-shadow: 4px 4px 0 var(--color-accent);
-  font-family: var(--font-display);
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.status::after {
-  border-color: var(--color-ink);
-}
-
-.status span {
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.status strong {
-  font-size: 0.95rem;
-  font-weight: 900;
-  line-height: 0.85;
-  text-align: center;
 }
 
 @media (max-width: 64rem) {
@@ -183,28 +148,6 @@ import HardwareTrail from "./HardwareTrail.vue";
 
   .tagline {
     font-size: clamp(1.1rem, 5.2vw, 1.35rem);
-  }
-}
-
-@media (min-width: 22.5rem) and (max-width: 64rem) {
-  .details {
-    grid-template-columns: 1fr auto;
-  }
-
-  .tagline,
-  .descriptor {
-    grid-column: 1 / -1;
-  }
-
-  .contact {
-    grid-column: 1;
-    align-self: center;
-  }
-
-  .status {
-    grid-column: 2;
-    justify-self: end;
-    margin-top: 0;
   }
 }
 

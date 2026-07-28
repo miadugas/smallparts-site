@@ -22,7 +22,7 @@ import { apps } from "../data/apps.js";
   right: 0;
   bottom: 0;
   left: clamp(-24rem, -21vw, -14rem);
-  background-image: url("../assets/parts-field-pastel.png");
+  background-image: url("../assets/parts-field-pastel.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

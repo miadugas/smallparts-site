@@ -1,6 +1,6 @@
-import elsewhere from "../assets/elsewhere.png";
-import looseTake from "../assets/loose-take.png";
-import nearlyDeparted from "../assets/nearly-departed.png";
+import elsewhere from "../assets/elsewhere.webp";
+import looseTake from "../assets/loose-take.webp";
+import nearlyDeparted from "../assets/nearly-departed.webp";
 
 export const apps = [
   {

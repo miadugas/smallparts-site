@@ -71,8 +71,9 @@ defineProps({
 
   .phone--elsewhere {
     top: 11%;
-    left: 65%;
+    left: 58%;
     width: clamp(11rem, 47vw, 18rem);
+    z-index: 4;
   }
 }
 
@@ -98,7 +99,7 @@ defineProps({
 
   .phone--elsewhere {
     top: 19%;
-    left: 70%;
+    left: 56%;
   }
 }
 

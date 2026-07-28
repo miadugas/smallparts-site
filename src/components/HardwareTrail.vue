@@ -2,7 +2,7 @@
   <span class="hardware-trail" aria-hidden="true">
     <img
       class="hardware"
-      src="../assets/hardware.png"
+      src="../assets/hardware.webp"
       alt=""
       width="900"
       height="134"
@@ -63,7 +63,7 @@
     bottom: -0.04em;
     left: calc(100% + clamp(8rem, 33vw, 13rem) - 1.5rem);
     display: block;
-    width: clamp(11rem, 28vw, 16rem);
+    width: clamp(8rem, 20vw, 11rem);
     height: auto;
     pointer-events: none;
   }
@@ -83,7 +83,7 @@
     bottom: -0.25em;
     right: calc(var(--spacing-gutter) + var(--spacing-gutter) + 100% - 100vw);
     left: auto;
-    width: clamp(7rem, 36vw, 8.5rem);
+    width: clamp(5.5rem, 26vw, 6.5rem);
   }
 }
 </style>

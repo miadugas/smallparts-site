@@ -2,13 +2,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f9ece3;
+  --color-paper: #e4f1ee;
   --color-ink: #121210;
-  --color-accent: #f2d894;
-  --color-focus: #ffd1d8;
+  --color-accent: #ffadad;
+  --color-focus: #fdffb6;
   --color-contact: #121210;
   --color-footer: #605b61;
   --color-space: #121210;
+  --color-sky: #d9edf8;
+  --color-lilac: #dedaf4;
 
   --font-display: "Small Parts Display", "Arial Narrow", sans-serif;
   --font-body: "Small Parts Body", "Helvetica Neue", Arial, sans-serif;

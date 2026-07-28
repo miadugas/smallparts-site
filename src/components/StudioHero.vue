@@ -27,7 +27,7 @@ import HardwareTrail from "./HardwareTrail.vue";
         <span>Ideas in. Software out.</span>
       </p>
       <p
-        class="descriptor m-0 max-w-[1012px] text-left font-sans text-[18px] leading-[120%] text-space"
+        class="descriptor m-0 max-w-[1012px] text-left font-sans leading-[120%] text-space"
       >
         iOS, Android, and web software from Littleton, Colorado.
       </p>
@@ -52,7 +52,7 @@ import HardwareTrail from "./HardwareTrail.vue";
 }
 
 .studio-title {
-  font-size: clamp(6.25rem, min(18.7vw, 31vh), 19rem);
+  font-size: clamp(6.25rem, min(18.7vw, calc(42.5svh - 126px)), 19rem);
   font-stretch: condensed;
   line-height: 0.8;
   letter-spacing: -0.01em;
@@ -90,6 +90,7 @@ import HardwareTrail from "./HardwareTrail.vue";
 
 .descriptor {
   margin-top: 0.1rem;
+  font-size: min(1.125rem, calc((100vw - 2 * var(--spacing-gutter)) / 24.5));
 }
 
 .contact {
@@ -100,7 +101,7 @@ import HardwareTrail from "./HardwareTrail.vue";
   color: var(--color-contact);
   font-size: clamp(0.82rem, 0.72rem + 0.22vw, 1rem);
   font-weight: 800;
-  text-decoration-color: #f9c0af;
+  text-decoration-color: #ffadad;
   text-decoration-thickness: 0.12em;
   text-underline-offset: 0.18em;
 }
@@ -119,7 +120,7 @@ import HardwareTrail from "./HardwareTrail.vue";
   margin-top: 0.3rem;
   padding: 0.65rem 0.8rem 0.6rem;
   color: var(--color-ink);
-  background: #f9c0af;
+  background: #ffd6a5;
   box-shadow: 4px 4px 0 var(--color-accent);
   font-family: var(--font-display);
   line-height: 1;
@@ -182,6 +183,28 @@ import HardwareTrail from "./HardwareTrail.vue";
 
   .tagline {
     font-size: clamp(1.1rem, 5.2vw, 1.35rem);
+  }
+}
+
+@media (min-width: 22.5rem) and (max-width: 64rem) {
+  .details {
+    grid-template-columns: 1fr auto;
+  }
+
+  .tagline,
+  .descriptor {
+    grid-column: 1 / -1;
+  }
+
+  .contact {
+    grid-column: 1;
+    align-self: center;
+  }
+
+  .status {
+    grid-column: 2;
+    justify-self: end;
+    margin-top: 0;
   }
 }
 

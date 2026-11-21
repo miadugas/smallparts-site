@@ -17,8 +17,7 @@
 @font-face {
   font-family: "Small Parts Display";
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700 900;
   font-display: swap;
-  src: url("../assets/fonts/barlow-condensed-black-latin.woff2")
-    format("woff2");
+  src: url("../assets/fonts/poppins-900.woff2") format("woff2");
 }

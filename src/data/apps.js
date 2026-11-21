@@ -8,7 +8,7 @@ export const apps = [
   {
     id: "palettarium",
     name: "The Palettarium",
-    line: "Color palettes, organized like little solar systems.",
+    line: "Color, arranged like a solar system.",
     platform: "iOS",
     href: "https://apps.apple.com/us/app/the-palettarium/id6818369942",
     image: palettarium,
@@ -19,7 +19,7 @@ export const apps = [
   {
     id: "departed",
     name: "Nearly Departed",
-    line: "Find the notable dead buried near you, on a map.",
+    line: "The notable dead, nearby.",
     platform: "iOS",
     href: "https://apps.apple.com/us/app/nearly-departed/id6802525537",
     image: nearlyDeparted,

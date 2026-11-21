@@ -80,3 +80,88 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   Redesign — kinetic hero, marquee, dark Work section
+   ============================================================ */
+:root {
+  --paper: #e4f1ee; --ink: #121210; --accent: #ffadad; --focus: #fdffb6;
+  --sky: #d9edf8; --lilac: #dedaf4; --footer: #605b61;
+  --display: "Small Parts Display", sans-serif;
+  --body: "Small Parts Body", sans-serif;
+}
+
+html, body { background: var(--ink); }
+body { overflow-x: hidden; }
+/* hide native cursor only once JS has the custom one running (and on pointer devices) */
+html.has-cursor body { cursor: none; }
+
+/* grain */
+.grain { position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* custom cursor */
+.cursor { position: fixed; top: 0; left: 0; z-index: 100; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--ink); pointer-events: none; transform: translate(-50%,-50%); mix-blend-mode: difference;
+  transition: width .2s, height .2s, background .2s; }
+.cursor.big { width: 60px; height: 60px; background: var(--accent); }
+@media (hover: none) { .cursor { display: none; } body { cursor: auto; } }
+
+/* hero */
+.hero { position: relative; height: 100svh; background: var(--paper); overflow: hidden; display: grid; place-items: center; }
+.stage { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+.wordmark { position: relative; z-index: 5; text-align: center; font-family: var(--display); font-weight: 900;
+  text-transform: uppercase; line-height: .78; letter-spacing: -.02em; color: var(--ink);
+  /* cap by height too so it never overgrows into the tagline on short viewports */
+  font-size: clamp(3.25rem, min(15vw, 23svh), 13rem); }
+.wordmark .line { display: block; overflow: hidden; }
+.wordmark .line span { display: inline-block; will-change: transform; }
+.part { position: absolute; z-index: 3; will-change: transform; opacity: .9; }
+.part svg { display: block; }
+.hero-foot { position: absolute; z-index: 6; left: clamp(1.25rem, 4vw, 3.5rem); bottom: clamp(1.5rem, 5vh, 3rem); max-width: 34ch; }
+.hero-foot .tag { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(1rem, 2vw, 1.6rem); line-height: .95; letter-spacing: -.01em; }
+.hero-foot .sub { font-size: clamp(.85rem, 1vw, 1rem); margin-top: .5rem; color: #2a2a28; }
+.scrollcue { position: absolute; z-index: 6; right: clamp(1.25rem, 4vw, 3.5rem); bottom: clamp(1.5rem, 5vh, 3rem);
+  font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: .8rem; letter-spacing: .2em;
+  writing-mode: vertical-rl; display: flex; align-items: center; gap: 10px; }
+.scrollcue .bar { display: block; width: 1px; height: 46px; background: var(--ink); transform-origin: top; }
+
+/* marquee */
+.marquee { background: var(--ink); color: var(--paper); padding: .6rem 0; overflow: hidden; white-space: nowrap; border-block: 1px solid var(--paper); }
+.marquee .track { display: inline-block; font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(1.4rem, 3vw, 2.4rem); letter-spacing: .02em; will-change: transform; }
+.marquee .track span { padding: 0 1.2rem; }
+.marquee .track .dot { color: var(--accent); }
+
+/* work */
+.work { position: relative; overflow: hidden; background: var(--ink); color: var(--paper); padding: clamp(4rem, 10vh, 9rem) clamp(1.25rem, 4vw, 3.5rem); }
+.work > * { position: relative; z-index: 1; }
+.work-deco { position: absolute; z-index: 0; top: 50%; right: -16%; transform: translateY(-50%); width: min(95vw, 1240px); pointer-events: none; }
+.work-deco img { display: block; width: 100%; height: auto; filter: invert(1); mix-blend-mode: screen; opacity: .025;
+  -webkit-mask-image: radial-gradient(ellipse 62% 62% at 52% 46%, #000 28%, transparent 76%);
+  mask-image: radial-gradient(ellipse 62% 62% at 52% 46%, #000 28%, transparent 76%); }
+@media (max-width: 800px) { .work-deco { width: 150vw; right: -40vw; } }
+.work-head { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.5rem, 9vw, 8rem); line-height: .82; letter-spacing: -.02em; margin-bottom: clamp(2rem, 6vh, 5rem); }
+.work-head .muted { color: var(--footer); }
+.app { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; padding: clamp(2rem, 6vh, 5rem) 0; border-top: 1px solid #333; }
+.app:nth-child(even) { direction: rtl; }
+.app:nth-child(even) > * { direction: ltr; }
+.app .shot { position: relative; border: 6px solid #000; border-radius: 28px; overflow: hidden; background: #000; box-shadow: 1.2rem 1.4rem 0 rgba(0,0,0,.5); max-width: 300px; justify-self: center; will-change: transform; }
+.app .shot img { display: block; width: 100%; height: auto; }
+.app .meta .no { font-family: var(--display); font-weight: 900; color: var(--accent); font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; }
+.app .meta h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.2rem, 6vw, 5rem); line-height: .85; letter-spacing: -.02em; margin: .3rem 0 .8rem; }
+.app .meta p { font-size: clamp(1rem, 1.4vw, 1.3rem); max-width: 30ch; color: #c9d4d1; margin-bottom: 1.4rem; }
+.app .meta .store { display: inline-block; transition: opacity .2s; }
+.app .meta .store img { display: block; height: 46px; width: auto; filter: invert(1); }
+.app .meta .store:hover { opacity: .82; }
+.app .meta .store:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; background: none; }
+
+.reveal { overflow: hidden; }
+.reveal > * { will-change: transform; }
+
+.site-foot { background: var(--ink); color: var(--footer); border-top: 1px solid #333; padding: 1.2rem clamp(1.25rem, 4vw, 3.5rem); font-size: 12px; }
+
+@media (max-width: 800px) {
+  .app { grid-template-columns: 1fr; direction: ltr; }
+  .app:nth-child(even) { direction: ltr; }
+}
+@media (prefers-reduced-motion: reduce) { .part { display: none; } }

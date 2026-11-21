@@ -15,26 +15,6 @@ const cleanup = [];
 onMounted(() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- custom cursor ---- */
-  if (matchMedia("(hover: hover)").matches) {
-    document.documentElement.classList.add("has-cursor");
-  }
-  const cur = document.getElementById("cursor");
-  let cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
-  const onMove = (e) => { tx = e.clientX; ty = e.clientY; };
-  addEventListener("pointermove", onMove);
-  let curRaf;
-  const curLoop = () => {
-    cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
-    if (cur) cur.style.transform = `translate(${cx - 7}px,${cy - 7}px)`;
-    curRaf = requestAnimationFrame(curLoop);
-  };
-  curLoop();
-  document.querySelectorAll("a,.store").forEach((el) => {
-    el.addEventListener("pointerenter", () => cur && cur.classList.add("big"));
-    el.addEventListener("pointerleave", () => cur && cur.classList.remove("big"));
-  });
-
   /* ---- scattered hardware parts ---- */
   const stage = document.getElementById("stage");
   const BOLT = `<svg width="46" height="46" viewBox="0 0 46 46"><path d="M23 2l8 5 8 0 0 9 5 7-5 7 0 9-8 0-8 5-8-5-8 0 0-9-5-7 5-7 0-9 8 0z" fill="none" stroke="#121210" stroke-width="2.5"/><circle cx="23" cy="23" r="7" fill="none" stroke="#121210" stroke-width="2.5"/></svg>`;
@@ -99,8 +79,6 @@ onMounted(() => {
   }
 
   cleanup.push(() => {
-    cancelAnimationFrame(curRaf);
-    removeEventListener("pointermove", onMove);
     ScrollTrigger.getAll().forEach((s) => s.kill());
   });
 
@@ -173,7 +151,6 @@ onBeforeUnmount(() => cleanup.forEach((fn) => fn()));
 
 <template>
   <div class="grain" aria-hidden="true"></div>
-  <div class="cursor" id="cursor" aria-hidden="true"></div>
   <main>
     <StudioHero />
     <Marquee />

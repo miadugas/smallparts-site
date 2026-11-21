@@ -93,19 +93,10 @@
 
 html, body { background: var(--ink); }
 body { overflow-x: hidden; }
-/* hide native cursor only once JS has the custom one running (and on pointer devices) */
-html.has-cursor body { cursor: none; }
 
 /* grain */
 .grain { position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .055; mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-
-/* custom cursor */
-.cursor { position: fixed; top: 0; left: 0; z-index: 100; width: 14px; height: 14px; border-radius: 50%;
-  background: var(--ink); pointer-events: none; transform: translate(-50%,-50%); mix-blend-mode: difference;
-  transition: width .2s, height .2s, background .2s; }
-.cursor.big { width: 60px; height: 60px; background: var(--accent); }
-@media (hover: none) { .cursor { display: none; } body { cursor: auto; } }
 
 /* hero */
 .hero { position: relative; height: 100svh; background: var(--paper); overflow: hidden; display: grid; place-items: center; }
